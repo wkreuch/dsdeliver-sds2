@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
+import { StyleSheet, Text, View } from 'react-native';
 import { Order } from '../types';
 import 'dayjs/locale/pt-br';
 import relativeTime  from 'dayjs/plugin/relativeTime';
@@ -17,23 +16,14 @@ function dateFromNow(date: string) {
     return dayjs(date).fromNow();
 }
 
-function formatPrice(price: number) {
-    const formatter = new Intl.NumberFormat('pt-BR',
-        { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
-
-    return formatter.format(price);
-}
-
 export default function OrderCard({ order }: Props) {
-    const handlerOnPress = () => {
 
-    };
     return (
         <>
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.orderName}>Pedido {order.id}</Text>
-                    <Text style={styles.orderPrice}>{formatPrice(order.total)}</Text>
+                    <Text style={styles.orderPrice}>R$ {order.total.toFixed(2)}</Text>
                 </View>
                 <Text style={styles.text}>{dateFromNow(order.moment)}</Text>
                 <View style={styles.productsList}>
